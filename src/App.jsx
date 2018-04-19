@@ -24,20 +24,19 @@ class App extends Component {
     }
   }
 
-  _addNewMessage = ({id, username, content}) => {
-    const allMessages = this.state.messages.concat({id, username, content, type: 'incomingMessage'});
+  _addNewMessage = (message) => {
+    const allMessages = this.state.messages.concat(message);
     this.setState({messages:allMessages});
   }
 
-  _sendNewMessages = ({username, content}) => {
-    this.socket.send(JSON.stringify({username, content}));
+  _sendNewMessages = (message) => {
+    this.socket.send(JSON.stringify(message));
   }
 
   _messageUpdate = (event) => {
-    if (event.keyCode === 13 || event.which === 13) { // keep waiting for the Enter key
+    if (event.keyCode === 13 || event.which === 13) { // wait for the Enter key before doing anything
       const newMessage = {
-        id: this.state.messages.length,
-        type: 'incomingMessage',
+        type: 'postMessage',
         username: this.state.currentUser.name,
         content: event.target.value
       };
@@ -47,7 +46,18 @@ class App extends Component {
   }
 
   _userUpdate = (event) => {
-    this.setState({currentUser:{name: event.target.value}});
+    if (event.keyCode === 13 || event.which === 13) { // wait for the Enter key before doing anything
+      const oldName = this.state.currentUser.name;
+      const newName = event.target.value;
+      this.setState({currentUser:{name: newName}});
+      const newMessage = {
+        type: 'postNotification',
+        username: this.state.currentUser.name,
+        content: `${oldName} changed their name to ${newName}`
+      };
+      this._sendNewMessages (newMessage);
+      event.target.value = '';
+    }
   }
 
   render() {
