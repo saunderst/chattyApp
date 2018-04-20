@@ -1,4 +1,6 @@
-// server.js
+/* server.js
+ * This is the chat server, capable of managing multiple remote clients.
+ */
 
 const express = require('express');
 const WebSocket = require('ws');
@@ -17,10 +19,10 @@ const wss = new WebSocket.Server({ server });
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
-let clientCount = 0;    // counts active connections, for display on the front end
+let clientCount = 0;    // counts active connections; for display on the front end
 let clientID = 0;       // counts each new connection; appended to messages so clients can uniquely identify message source
 
-// a little function to update any urrent status for the clients, presently just consisting of the number of active connections
+// a little function to update any current status for the clients, presently just consisting of the number of active connections
 updateStatus = (server, clients) => {
   server.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
@@ -32,7 +34,8 @@ updateStatus = (server, clients) => {
 wss.on('connection', (ws) => {
   ws.clientID = ++clientID;
   updateStatus (wss, ++clientCount);
-  ws.on('message', (message) => {   // as a client message is received, broadcast it to all clients with a unique ID attached
+  // as a client message is received, broadcast it to all clients with a unique ID attached
+  ws.on('message', (message) => {  
     let msgFields = JSON.parse(message);
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
