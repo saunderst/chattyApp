@@ -37,3 +37,7 @@ The web server by default listens at `localhost:3000`.
 * express
 * ws
 * uuid
+
+## Screenshots
+
+!["Screenshot of ChattyApp messages"](https://github.com/saunderst/chattyApp/blob/master/ChattyAppScreenshot.png)
