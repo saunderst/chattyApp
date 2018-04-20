@@ -68,6 +68,10 @@ body {
   font-weight: 700;
 }
 
+.message-image {
+  max-width: 60%;
+}
+
 .navbar {
   background: tomato;
   border-bottom: 1px solid black;
@@ -89,4 +93,27 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+}
+
+#user-count {
+  display: block;
+  float:right;
+  padding: 0 10px;
+  line-height: 60px;
+}
+
+.user-color0 {
+  color: lightblue;
+}
+
+.user-color1 {
+  color: red;
+}
+
+.user-color2 {
+  color: green;
+}
+
+.user-color3 {
+  color: purple;
 }
