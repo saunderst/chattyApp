@@ -1,45 +1,31 @@
-React Boilerplate
+Chatty App
 =====================
 
-A minimal and light dev environment for ReactJS.
+A single-page multi-user chat app with a basic server.
+
+### Features
+
+Displays a chat log consisting of user messages and system notifications.
+When any connected user sends a chat message, all connected users receive and display the message.
+Connecting users are identified as "Anonymous" by default, and have the option of specifying an identifying name and changing it at any time.
+When any connected user changes their name, all connected users are notified of the name change.
+Header displays the count of currently connected users.
+Different users' names are coloured differently on the main display.
 
 ### Usage
 
-Clone the boilerplate and create your own git repo.
-
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
-
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
+Clone project and run `npm install` to install dependencies.
+`npm start` from the root directory to start the web server.
+`npm start` from the `chatty_server` directory to start the chat server.
+The web server by default listens at `localhost:3000`.
 
 ### Dependencies
 
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+## Client
+* react
+* react-dom
+
+## Server
+* express
+* ws
+* uuid
